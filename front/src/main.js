@@ -7,7 +7,6 @@ import {io} from 'socket.io-client'
 const app = createApp(App)
 
 app.config.globalProperties.$socket = io(process.env.VUE_APP_SOCKET_DSN, {
-  path: '/socket.io',
   transports: ['websocket', 'polling'],
 })
 

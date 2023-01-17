@@ -27,7 +27,6 @@ const io = new Server(httpServer, {
   cors: {
     origin: '*',
   },
-  path: 'socket.io',
   transports: ['websocket', 'polling'],
 })
 
