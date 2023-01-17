@@ -1,7 +1,6 @@
 import database from '../database.js'
 import Tweet from './model.js'
 const getTweets = (req, res) => {
-	console.log('coucou ' + req)
 	database.query('SELECT * FROM tweets ORDER BY id DESC', (err, results) => {
 		if (err) {
 			res.status(500).send(err)

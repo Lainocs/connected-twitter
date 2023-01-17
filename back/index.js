@@ -19,7 +19,7 @@ database.connect()
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use('/', router)
+app.use('/api', router)
 
 const httpServer = createServer(app)
 
