@@ -7,7 +7,7 @@ import {io} from 'socket.io-client'
 const app = createApp(App)
 
 app.config.globalProperties.$socket = io(process.env.VUE_APP_SOCKET_DSN, {
-  path: '/back'
+  path: '/socket.io'
 })
 
 app.use(store).use(router).mount('#app')
