@@ -34,7 +34,7 @@
 		},
 		methods: {
 			async getTweets() {
-				await fetch(process.env.VUE_APP_SOCKET_DSN + '/tweets')
+				await fetch(process.env.VUE_APP_API_DSN + '/tweets')
 					.then((response) => response.json())
 					.then((data) => {
 						this.tweets = data
