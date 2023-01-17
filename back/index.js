@@ -5,6 +5,7 @@ import database from './database.js'
 import cors from 'cors'
 import { Server } from 'socket.io'
 import * as dotenv from 'dotenv'
+import { createServer } from 'http'
 
 dotenv.config({
   path: './.env.local',
@@ -20,11 +21,9 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use('/', router)
 
-const server = app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+const httpServer = createServer(app)
 
-const io = new Server(server, {
+const io = new Server(httpServer, {
   cors: {
     origin: '*',
   }
@@ -38,4 +37,8 @@ io.on('connection', (socket) => {
   socket.on('tweet', (tweet) => {
     io.emit('tweet', tweet)
   })
+})
+
+httpServer.listen(port, () => {
+  console.log(`Server running on port ${port}`)
 })
