@@ -26,7 +26,8 @@ const httpServer = createServer(app)
 const io = new Server(httpServer, {
   cors: {
     origin: '*',
-  }
+  },
+  allowEIO3: true
 })
 
 io.on('connection', (socket) => {
