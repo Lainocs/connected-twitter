@@ -6,6 +6,7 @@ import {io} from 'socket.io-client'
 
 const app = createApp(App)
 
-app.config.globalProperties.$socket = io('http://localhost:3000')
+// use port in .env.local file
+app.config.globalProperties.$socket = io('http://localhost:' + process.env.PORT)
 
 app.use(store).use(router).mount('#app')
