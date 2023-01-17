@@ -4,9 +4,15 @@ import bodyParser from 'body-parser'
 import database from './database.js'
 import cors from 'cors'
 import { Server } from 'socket.io'
+import * as dotenv from 'dotenv'
+
+dotenv.config({
+  path: './.env.local',
+  override: true
+})
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 database.connect()
 
