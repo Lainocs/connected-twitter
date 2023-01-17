@@ -39,7 +39,7 @@ export default {
 	methods: {
 		sendTweet() {
 			if (this.tweet.content === '') return
-			fetch('http://localhost:3000/tweets', {
+			fetch(process.env.VUE_APP_SOCKET_DSN + '/tweets', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
