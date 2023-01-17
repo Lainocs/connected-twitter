@@ -46,4 +46,10 @@ export default {
 			display: none;
 		}
 	}
+
+	@media screen and (max-width: 600px) {
+		.home > div:first-child {
+			display: none;
+		}
+	}
 </style>
