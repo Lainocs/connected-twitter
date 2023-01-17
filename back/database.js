@@ -1,13 +1,16 @@
 import * as dotenv from 'dotenv'
 import { createConnection } from 'mysql'
 
-dotenv.config()
+dotenv.config({
+  path: './.env.local',
+  override: true
+})
 
 const connection = createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'twitterjpo'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 })
 
 export default connection
