@@ -1,17 +1,45 @@
 <template>
-	<form @submit.prevent="sendTweet()" class="tweet-bar">
+	<form
+		@submit.prevent="sendTweet()"
+		class="tweet-bar"
+	>
 		<div class="tweet-input">
-			<img src="@/assets/nico.jpeg" alt="nico">
-			<input type="text" placeholder="Quoi de neuf ?" v-model="tweet.content">
+			<img
+				src="@/assets/nico.jpeg"
+				alt="nico"
+			/>
+			<input
+				type="text"
+				placeholder="Quoi de neuf ?"
+				v-model="tweet.content"
+			/>
 		</div>
 		<div class="tweet-buttons">
 			<div class="tweet-images">
-				<img src="@/assets/icons/pictures.svg" alt="pictures">
-				<img src="@/assets/icons/gif.svg" alt="gif">
-				<img src="@/assets/icons/question.svg" alt="question">
-				<img src="@/assets/icons/emoji.svg" alt="emoji">
-				<img src="@/assets/icons/calendar.svg" alt="calendar">
-				<img src="@/assets/icons/position.svg" alt="position">
+				<img
+					src="@/assets/icons/pictures.svg"
+					alt="pictures"
+				/>
+				<img
+					src="@/assets/icons/gif.svg"
+					alt="gif"
+				/>
+				<img
+					src="@/assets/icons/question.svg"
+					alt="question"
+				/>
+				<img
+					src="@/assets/icons/emoji.svg"
+					alt="emoji"
+				/>
+				<img
+					src="@/assets/icons/calendar.svg"
+					alt="calendar"
+				/>
+				<img
+					src="@/assets/icons/position.svg"
+					alt="position"
+				/>
 			</div>
 			<div>
 				<button type="submit">Tweeter</button>
@@ -20,40 +48,70 @@
 	</form>
 </template>
 <script>
-export default {
-	name: 'PostBar',
-	data() {
-		return {
-			tweet: {
-				name: `Futur Étudiant`,
-				username: '@etudiant',
-				time: null,
-				content: '',
-				comments: Math.floor(Math.random() * 1000),
-				retweets: Math.floor(Math.random() * 1000),
-				likes: Math.floor(Math.random() * 1000),
-			},
-		}
-	},
-
-	methods: {
-		sendTweet() {
-			if (this.tweet.content === '') return
-			fetch(process.env.VUE_APP_API_DSN + '/tweets', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+	export default {
+		name: 'PostBar',
+		data() {
+			return {
+				tweet: {
+					name: `Futur Étudiant`,
+					username: '@etudiant',
+					time: null,
+					content: '',
+					comments: Math.floor(Math.random() * 1000),
+					retweets: Math.floor(Math.random() * 1000),
+					likes: Math.floor(Math.random() * 1000),
 				},
-				body: JSON.stringify(this.tweet),
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					this.$socket.emit('tweet', data)
-					this.tweet.content = ''
-				})
+				possibles: [
+					'red',
+					'green',
+					'blue',
+					'yellow',
+					'orange',
+					'purple',
+					'magenta',
+					'cyan',
+					'pink',
+					'clignote',
+					'breath',
+					'load',
+					'snake',
+					'switch',
+					'fill'
+				]
+			}
 		},
-	},
-}
+
+		methods: {
+			sendTweet() {
+				if (this.tweet.content === '') return
+				this.checkHashtag(this.tweet)
+				fetch(process.env.VUE_APP_API_DSN + '/tweets', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(this.tweet),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						this.$socket.emit('tweet', data)
+						this.tweet.content = ''
+					})
+			},
+			checkHashtag(tweet) {
+				if (tweet.content.includes('#')) {
+					const hashtags = tweet.content.match(/#[a-zA-Z0-9]+/g)
+					const hashtagsWithoutHash = hashtags.map((hashtag) => hashtag.replace('#', ''))
+					const hashtagsInPossibles = hashtagsWithoutHash.filter((hashtag) => this.possibles.includes(hashtag))
+
+					if (hashtagsInPossibles.length > 0) {
+						console.log(hashtagsInPossibles)
+						this.$socket.emit('hashtags', hashtagsInPossibles)
+					}
+				}
+			},
+		},
+	}
 </script>
 <style scoped>
 	.tweet-bar {
@@ -108,7 +166,7 @@ export default {
 	}
 
 	.tweet-buttons button {
-		background-color: #1DA1F2;
+		background-color: #1da1f2;
 		color: white;
 		border: none;
 		border-radius: 20px;

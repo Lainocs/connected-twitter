@@ -39,16 +39,6 @@
 					.then((data) => {
 						this.tweets = data
 					})
-				
-				this.checkHashtag()
-			},
-			checkHashtag() {
-				this.tweets.forEach((tweet) => {
-					if (tweet.content.includes('#')) {
-						const hashtag = tweet.content.split('#')[1]
-						console.log(hashtag)
-					}
-				})
 			},
 		},
 		mounted() {

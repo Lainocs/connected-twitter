@@ -38,6 +38,9 @@ io.on('connection', (socket) => {
   socket.on('tweet', (tweet) => {
     io.emit('tweet', tweet)
   })
+  socket.on('hashtags', (hashtags) => {
+    io.emit('hashtags', hashtags)
+  })
 })
 
 httpServer.listen(port, () => {
