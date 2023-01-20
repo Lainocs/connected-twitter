@@ -71,12 +71,16 @@
 					'magenta',
 					'cyan',
 					'pink',
+					'white',
 					'clignote',
 					'breath',
 					'load',
 					'snake',
 					'switch',
-					'fill'
+					'fill',
+					'love',
+					'friend',
+					'beer'
 				]
 			}
 		},
