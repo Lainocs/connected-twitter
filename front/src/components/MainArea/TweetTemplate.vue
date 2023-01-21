@@ -50,6 +50,7 @@ export default {
 </script>
 <style>
 .contents {
+	width: 100%;
 	display: flex;
 	align-items: center;
 	padding: 20px;
@@ -60,6 +61,7 @@ export default {
 .content {
 	display: flex;
 	align-items: center;
+	flex-grow: 1;
 }
 
 .content-img img {
@@ -89,6 +91,7 @@ export default {
 .content-tweet {
 	margin-top: 10px;
 	width: 95%;
+	word-break: break-all;
 }
 
 .content-info {
