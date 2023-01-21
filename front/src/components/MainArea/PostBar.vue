@@ -5,8 +5,8 @@
 	>
 		<div class="tweet-input">
 			<img
-				src="@/assets/nico.jpeg"
-				alt="nico"
+				src="@/assets/profile.webp"
+				alt="profile-icon"
 			/>
 			<input
 				type="text"
@@ -53,8 +53,8 @@
 		data() {
 			return {
 				tweet: {
-					name: `Futur Étudiant`,
-					username: '@etudiant',
+					name: `Coding & IOT`,
+					username: '@etudiant.e',
 					time: null,
 					content: '',
 					comments: Math.floor(Math.random() * 1000),
