@@ -90,7 +90,6 @@ export default {
 
 .content-tweet {
 	margin-top: 10px;
-	width: 95%;
 	word-break: break-all;
 }
 
